@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  background-color: thistle;
+  font-family: "Raleway", sans-serif;
+}
+
+canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.ui-cnt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  padding: 1rem;
+
+  .box-cnt {
+    background: #f1f5f6da;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.7px);
+    -webkit-backdrop-filter: blur(8.7px);
+    border: 1px solid rgba(108, 108, 108, 0.3);
+    color: #35181a;
+    text-transform: uppercase;
+    font-size: 0.675rem;
+    padding: 0.5rem;
+    margin: 1.5rem 0;
+
+    h3{
+    margin: 0.5rem ;
+    }
+
+    button {
+      border: 1px solid #f1f5f6;
+      width: 2rem;
+      height: auto;
+      aspect-ratio: 1/1;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      border-radius: 3px;
+      
+      margin-bottom: 0.5rem;
+      transition: ease-in-out 0.2s;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+    }
+
+    #btn-imp1 {
+      background: #970c08;
+    }
+
+    #btn-imp2 {
+      background: #d4ab16;
+    }
+
+    #btn-imp3 {
+      background: #000000;
+    }
+
+    #btn-imp4 {
+      background: #cccccc;
+    }
+
+    #btn-col1 {
+      background: #df630b;
+    }
+    #btn-col2 {
+      background-image: url("../src/assets/rip.png");
+      background-size: cover;
+    }
+  }
+}
