@@ -6,11 +6,26 @@ export default function BorsaUI() {
   const dispatch = useDispatch();
 
   function changeToOrange() {
-    dispatch(setBaseTexture("/piazzate/COLOR.png"));
+    const orangeBaseTextures = {
+      baseTexture: "/piazzate/COLOR.png",
+      normalMap: "/piazzate/NORMAL.png",
+      roughnessMap: "/piazzate/ROUGHNESS.png",
+      specularMap: "/piazzate/SPECULAR.png",
+    };
+
+    dispatch(setBaseTexture(orangeBaseTextures));
   }
+
   function changeToPattern() {
-    dispatch(setBaseTexture("/ripetute/COLOR.jpg"));
+    const patternTexture = {
+      baseTexture: "/ripetute/COLOR.jpg",
+      normalMap: "/ripetute/NRM.jpg",
+      roughnessMap: "/ripetute/ROUGH.jpg",
+      specularMap: "/ripetute/SPEC.jpg",
+    };
+    dispatch(setBaseTexture(patternTexture));
   }
+
   function changeToBlack() {
     dispatch(setImpColor("black"));
   }

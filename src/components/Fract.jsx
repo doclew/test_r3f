@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unknown-property */
-import { useEffect } from "react";
 import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { TextureLoader, MeshStandardMaterial } from "three";
@@ -14,6 +13,16 @@ export default function Borsa(props) {
     return state.baseColor.baseTexture;
   });
 
+  const normalMap = useSelector((state) => {
+    return state.baseColor.normalMap;
+  });
+  const roughnessMap = useSelector((state) => {
+    return state.baseColor.roughnessMap;
+  });
+  const specularMap = useSelector((state) => {
+    return state.baseColor.specularMap;
+  });
+
   const impColor = useSelector((state) => {
     return state.impuntureCol.impColor;
   });
@@ -21,11 +30,39 @@ export default function Borsa(props) {
   if (!baseTexture && !impColor) {
     return null;
   }
- 
-  const colorTexture = new TextureLoader().load("/ripetute/COLOR.jpg");
-  const normalTexture = new TextureLoader().load("/ripetute/NRM.jpg");
-  const roughnessTexture = new TextureLoader().load("/ripetute/ROUGH.jpg");
-  const specularTexture = new TextureLoader().load("/ripetute/SPEC.jpg");
+
+  const colorTexture = new TextureLoader().load(
+    baseTexture,
+
+    function (texture) {
+      texture.flipY = false;
+      texture.repeat.set(1, 1);
+      nodes.Tessuto.material.map = texture;
+    }
+  );
+
+  const normalTexture = new TextureLoader().load(normalMap, function (texture) {
+    texture.flipY = false;
+    texture.repeat.set(1, 1);
+    nodes.Tessuto.material.normalMap = texture;
+  });
+
+  const roughnessTexture = new TextureLoader().load(
+    roughnessMap,
+    function (texture) {
+      texture.flipY = false;
+      texture.repeat.set(1, 1);
+      nodes.Tessuto.material.roughnessMap = texture;
+    }
+  );
+  const specularTexture = new TextureLoader().load(
+    specularMap,
+    function (texture) {
+      texture.flipY = false;
+      texture.repeat.set(1, 1);
+      nodes.Tessuto.material.metalnessMap = texture;
+    }
+  );
 
   // Tessuto mat
   nodes.Tessuto.material.map = colorTexture;
@@ -48,14 +85,6 @@ export default function Borsa(props) {
     normalMap: normalTexture,
     roughness: 0.8,
   });
-
-  useEffect(() => {
-    if (!baseTexture) return;
-
-    const colorTexture = new TextureLoader().load(baseTexture);
-
-    nodes.Tessuto.material.map = colorTexture;
-  }, [baseTexture, nodes.Tessuto.material]);
 
   return (
     <group ref={group} {...props} dispose={null}>
